@@ -1,0 +1,116 @@
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="robbyrussell"
+
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+#Setting up thefuck for zsh
+eval $(thefuck --alias)
+
+alias update-aws-accounts="vim ~/.aws/credentials"
+alias zsh-config="vim ~/.zshrc"
+alias update-zsh=". ~/.zshrc"
+
+#aws account aliases
+alias aws-personal="export AWS_DEFAULT_PROFILE=james.harrington"
+
+#git aliases
+alias clean-git="git branch --merged | egrep -v "master" | xargs git branch -d"
+alias delete-git-lock="rm -f .git/index.lock"
+alias bump="git commit --allow-empty -m "Bump" && git push"
+
+# aliasses of commonly used directories
+alias repos="/Users/jamesharrington/repos"
+alias connectors="/Users/jamesharrington/repos/jira-cloudforge-connector"
+alias old-connectors="/Users/jamesharrington/repos/jira-servicedesk-connector"
+
+function open-connectors {
+  connectors && code .
+}
+
+function run-old-connectors {
+  old-connectors && make clean ui debug
+}
+
+function tunnel-connectors {
+  connectors && npm run build-all && forge tunnel
+}
+
+function update-forge-cli {
+  npm uninstall --location=global  @forge/cli && npm install --location=global @forge/cli
+}
+
+function lolbanner {
+  figlet -c -f ~/.local/share/fonts/figlet-fonts/3d.flf $@ | lolcat
+}
+
+function delete-git-lock {
+  rm -f .git/index.lock
+}
+
+function jira-build-tunnel {
+  connectors && npm run build-all && forge tunnel
+}
+
+function get-my-ip {
+  dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com |  cut -d "\"" -f 2
+}
+
+function merge-main-with-current-branch {
+  currentBranch=$(git rev-parse --abbrev-ref HEAD)
+  echo $currentBranch
+
+  git symbolic-ref refs/remotes/origin/HEAD | tr "/" " " | awk '{print $NF}' | read mainBranchName
+
+  eval "git stash"  
+  eval "git checkout ${mainBranchName}"
+  eval "git pull"
+  eval "git checkout ${currentBranch}"
+  eval "git merge ${mainBranchName}"
+  eval "git stash pop"
+}
+
+#NVM
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+nvm use default > /dev/null 2>&1
+
+#AWS Accounts
+alias aws-personal="export AWS_PROFILE=james.harrington"
+
+#Java Alias
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=$JAVA_HOME:$PATH
+
+#Add Maven to Path
+export M2_HOME=/Applications/apache-maven-3.8.4
+export PATH=$PATH:$M2_HOME/bin
+
+#Add CMake to Path
+export CMAKE=/Applications/CMake.app/Contents/bin
+export PATH=$PATH:$CMAKE
+
+#Add Python to Path
+export PYTHON=/Library/Python/3.7/bin
+export PATH=$PATH:$PYTHON
+
+#Forge App Ids
+export FORGE_APP_ID=63491582-29c0-4326-bd24-0c35e29ef71d
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+fpath=($fpath "/Users/jamesharrington/.zfunctions")
+
+# Set Spaceship ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt spaceship
+fpath=($fpath "/Users/jamesharrington/.zfunctions")
+
