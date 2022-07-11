@@ -1,4 +1,4 @@
-# Marc
+# Marc - Maintain All Run Commands
 
 Marc is a tool that helps develop and maintain all run commands for you Mac/Linux terminal.
 

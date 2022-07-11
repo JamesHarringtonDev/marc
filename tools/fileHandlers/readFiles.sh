@@ -1,0 +1,3 @@
+fileNames=$@
+
+echo $fileNames
