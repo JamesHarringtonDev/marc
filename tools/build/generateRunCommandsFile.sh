@@ -5,6 +5,7 @@ filename="rcFile$timestamp"
 
 touch "output/"$filename
 
+printf "#header.sh \n" >> "output/"$filename 
 cat header.sh >> "output/"$filename
 printf "\n" >> "output/"$filename 
 
@@ -14,6 +15,7 @@ for FILE in "fragments"/*; do
   printf "\n" >> "output/"$filename 
 done;
 
+printf "\n#footer.sh \n" >> "output/"$filename 
 cat footer.sh >> "output/"$filename
 
 echo "File generated: output/$filename"
