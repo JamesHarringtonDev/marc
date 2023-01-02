@@ -6,6 +6,9 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# fragments/banana/banana 
+hello
+
 # fragments/fun 
 function lolbanner {
   figlet -c -f ~/.local/share/fonts/figlet-fonts/3d.flf $@ | lolcat
