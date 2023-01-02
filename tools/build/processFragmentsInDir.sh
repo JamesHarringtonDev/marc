@@ -1,12 +1,9 @@
 #!/bin/bash
 
 dirName=$1
-fileToWrite=$2
+fileToWrite=$2 
 
-echo 
-
-for FILE in $dirName/*; do
-  echo $FILE
+for FILE in $dirName/*; do d
   if [ -d $FILE ]; then
     ./tools/build/processFragmentsInDir.sh $FILE $fileToWrite
   else
@@ -14,4 +11,4 @@ for FILE in $dirName/*; do
     cat $FILE >> $fileToWrite
     printf "\n" >> $fileToWrite 
   fi
-done;
+done; 
