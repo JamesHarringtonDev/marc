@@ -1,0 +1,2 @@
+alias repos="cd /Users/jamesharrington/repos"
+alias repo::marc="repos && cd marc"
