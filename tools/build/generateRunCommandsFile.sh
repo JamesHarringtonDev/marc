@@ -3,6 +3,7 @@
 timestamp=$(date +"%m%d%y-%H%M")
 filename="rcFile$timestamp"
 
+rm -f "output/"$filename
 touch "output/"$filename
 
 printf "#header.sh \n" >> "output/"$filename 
