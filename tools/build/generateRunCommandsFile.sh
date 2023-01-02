@@ -2,6 +2,8 @@
 
 filename=$1
 
+mkdir -p output
+
 rm -f "output/"$filename
 touch "output/"$filename
 
