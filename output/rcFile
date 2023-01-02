@@ -1,0 +1,31 @@
+#header.sh 
+export ZSH="/Users/jamesharrington/.oh-my-zsh"
+ZSH_THEME="spaceship"
+
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+# fragments/banana/banana 
+hello
+
+# fragments/fun 
+function lolbanner {
+  figlet -c -f ~/.local/share/fonts/figlet-fonts/3d.flf $@ | lolcat
+}
+
+# fragments/git-alias 
+alias repos="cd /Users/jamesharrington/repos"
+alias repo::marc="repos && cd marc"
+
+# fragments/go 
+export PATH=/usr/local/go/bin:$PATH
+
+# fragments/the-fuck 
+eval $(thefuck --alias)
+
+# fragments/zsh-shortcuts 
+alias zshconfig="nano ~/.zshrc"
+alias setzshconfig=". ~/.zshrc"
+
+#footer.sh 
